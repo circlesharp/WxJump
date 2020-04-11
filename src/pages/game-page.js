@@ -10,16 +10,19 @@ export default class GamePage {
         console.log(canvas)
         //1、场景
         const scene = new THREE.Scene()
+        console.log('ffffff:', scene)
+        this.scene = scene
         const geometry = new THREE.BoxGeometry(100, 100, 100)
         const material = new THREE.MeshLambertMaterial({
             color: 0xff0000
         })
         const mesh = new THREE.Mesh(geometry, material)
+        this.mesh = mesh
         scene.add(mesh)
         const light = new THREE.PointLight(0xffffff)
         light.position.set(400, 300, 200)
         scene.add(light)
-        const helper = new THREE.AxisHelper(200)
+        const helper = new THREE.AxesHelper(200)
         scene.add(helper)
 
         //2、摄像头
@@ -37,7 +40,20 @@ export default class GamePage {
         renderer.setSize(width, height)
         renderer.setClearColor(0x443333)
         renderer.render(scene, camera)
+        // setTimeout(() => {
+        //     this.callbacks.showGameOverPage()
+        //     console.log('5s后显示gameover')
+        // }, 5000)
 
+    }
+
+    //动画才能实现显示隐藏，静态不能隐藏！！！
+    show() {
+        this.mesh.visible = true
+    }
+
+    hide() {
+        this.mesh.visible = false
     }
 
     restart() {
