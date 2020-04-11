@@ -26,3 +26,4 @@ class GameView {
 
 //单例工厂
 export default new GameView()
+
