@@ -33,17 +33,34 @@ export default class GamePage {
         camera.position.set(200, 300, 200)
         camera.lookAt(new THREE.Vector3(0, 0, 0))
 
+        let g_currentAngle = 0, g_lastTime = Date.now()
+        //动画旋转
+        const animate = function () {
+            const now = Date.now()
+            const duration = now - g_lastTime
+            g_lastTime = now
+            g_currentAngle += duration / 1000 * Math.PI
+        }
+        const tick = function () {
+            animate()
+            mesh.rotation.set(0, g_currentAngle, 0)
+            renderer.render(scene, camera)
+            requestAnimationFrame(tick)
+        }
+
         //3、渲染器
         const renderer = new THREE.WebGLRenderer({
             canvas
         })
         renderer.setSize(width, height)
         renderer.setClearColor(0x443333)
-        renderer.render(scene, camera)
-        // setTimeout(() => {
-        //     this.callbacks.showGameOverPage()
-        //     console.log('5s后显示gameover')
-        // }, 5000)
+        tick()
+
+
+        setTimeout(() => {
+            this.callbacks.showGameOverPage()
+            console.log('5s后显示gameover')
+        }, 5000)
 
     }
 

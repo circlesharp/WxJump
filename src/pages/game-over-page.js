@@ -31,6 +31,7 @@ export default class GameOverPage {
         this.scene.add(this.obj)
         //没有添加成功！！！！
         console.log()
+        this.obj.visible =false;
 
     }
 
