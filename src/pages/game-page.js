@@ -1,6 +1,7 @@
 import {scene} from '../scene/index'
 import Cuboid from "../block/cuboid";
 import Cylinder from "../block/cylinder";
+import ground from '../objects/ground'
 
 export default class GamePage {
     //负责接受controller的控制
@@ -9,10 +10,14 @@ export default class GamePage {
     }
 
     init() {
+        //很清晰，没有具体业务
         console.log('game page init')
         this.scene = scene
+        this.ground= ground
         this.scene.init()
+        this.ground.init()
         this.addInitBlock()
+        this.addGround()
         this.render()
     }
 
@@ -21,6 +26,9 @@ export default class GamePage {
         const cylinderBlock = new Cylinder(23, 0, 0)
         this.scene.instance.add(cuboidBlock.instance)
         this.scene.instance.add(cylinderBlock.instance)
+    }
+    addGround(){
+        this.scene.instance.add(this.ground.instance)
     }
 
     render() {
