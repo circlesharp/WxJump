@@ -1,6 +1,7 @@
 import camera from './camera'
 import light from './light'
 import background from '../objects/background'
+
 class Scene {
     constructor() {
         this.instance = null
@@ -13,6 +14,9 @@ class Scene {
             antilias: true,//抗锯齿
             preserveDrawingBuffer: true
         })
+        this.renderer.shadowMap.enabled = true
+        this.renderer.shadowMap.type = THREE.PCFShadowMap
+
         this.camera = camera
         this.light = light
         this.background = background
@@ -26,7 +30,7 @@ class Scene {
 
         this.instance.add(this.camera.instance)
         this.instance.add(this.axesHelper)
-        for(let lightType in this.light.instances){
+        for (let lightType in this.light.instances) {
             this.instance.add(this.light.instances[lightType])
         }
     }
