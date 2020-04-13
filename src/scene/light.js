@@ -8,7 +8,7 @@ class Light {
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
         //平行光
         const shadowLight = new THREE.DirectionalLight(0xffffff, 0.3)
-        shadowLight.castShow = true
+        shadowLight.castShadow = true
         shadowLight.shadow.camera.near = 0.5
         shadowLight.shadow.camera.far = 500
         shadowLight.shadow.camera.left = -100
